@@ -235,6 +235,9 @@ function go(tab){
   var el=document.getElementById("view-"+tab); if(el)el.classList.add("on");
   document.querySelectorAll("nav.tabs button").forEach(function(b){b.classList.toggle("on",b.dataset.tab===tab);});
   state.lastTab=tab;save();
+  // 危険サインは判断が起きるタブ(ホーム・受診科・市販薬)のみ表示。養生・記録では非表示
+  var em=document.getElementById("emergencyBox");
+  if(em)em.style.display=(tab==="home"||tab==="shinryo"||tab==="otc")?"":"none";
   window.scrollTo(0,0);
   if(tab==="shinryo")renderShinryo();
   if(tab==="otc")renderOtc();
